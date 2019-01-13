@@ -1,0 +1,4 @@
+# let's hide our key
+.env
+# let's not overload github with junk
+node_modules/
