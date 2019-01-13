@@ -3,8 +3,7 @@ const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 
 const port = process.env.PORT || 9000;
 // const io = require("socket.io")();
-const express = require("express");
-const app = express();
+const app = require("express")();
 
 app.use("/slack/events", slackEvents.expressMiddleware());
 
