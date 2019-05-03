@@ -1,11 +1,30 @@
 require("dotenv").config();
-const { createEventAdapter } = require("@slack/events-api");
+import { createEventAdapter } from "@slack/events-api";
+const app = require("express")();
+import { ApolloServer } from "apollo-server-express";
+const { execute, subscribe } = require("graphql");
+import { createServer } from "http";
+import typeDefs from "./schema";
+import cors from "cors";
+import resolvers from "./resolvers";
 
 const slackEvents = createEventAdapter(process.env.SLACK_SIGNING_SECRET);
 
-const port = process.env.PORT || 9000;
+export const schema = new ApolloServer({
+  typeDefs,
+  resolvers,
+  playground: {
+    endpoint: "/graphiql",
+    settings: {
+      "editor.theme": "light"
+    }
+  }
+});
 
-const app = require("express")();
+const port = process.env.PORT || 9000;
+const slackPort = process.env.SLACK_PORT || 9001;
+
+const graphqlEndpoint = "/graphql";
 
 app.use("/slack/events", slackEvents.expressMiddleware());
 
@@ -18,6 +37,6 @@ slackEvents.on("message", event => {
 
 slackEvents.on("error", console.error);
 
-slackEvents.start(port).then(() => {
+slackEvents.start(slackPort).then(() => {
   console.log(`server listening on port: ${port}`);
 });

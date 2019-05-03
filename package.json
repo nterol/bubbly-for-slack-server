@@ -2,11 +2,11 @@
   "name": "slack-bubbly-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon --exec babel-node app.js"
   },
   "keywords": [],
   "author": "",
@@ -14,13 +14,17 @@
   "dependencies": {
     "@slack/events-api": "^2.1.1",
     "apollo-server-express": "^2.4.8",
-    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "dotenv": "^6.2.0",
+    "express": "^4.16.4",
     "graphql": "^14.2.1",
     "graphql-tools": "^4.0.4",
     "socket.io": "^2.2.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-3": "^6.24.1",
     "nodemon": "^1.18.9"
   }
 }
