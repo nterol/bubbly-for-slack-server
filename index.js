@@ -1,5 +1,6 @@
 require("dotenv").config();
 import { createEventAdapter } from "@slack/events-api";
+
 const app = require("express")();
 import { ApolloServer } from "apollo-server-express";
 const { execute, subscribe } = require("graphql");
